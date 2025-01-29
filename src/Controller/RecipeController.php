@@ -12,12 +12,15 @@ final class RecipeController extends AbstractController
     #[Route('/recipe', name: 'recipe.index')]
     public function index(Request $request): Response
     {
-        return new Response('Recipes');
+        return $this->render('recipe/index.html.twig');
     }
 
     #[Route('/recipe/{slug}-{id}', name: 'recipe.show', requirements: ['slug' => '[a-z0-9-]+', 'id' => '\d+'])]
     public function show(Request $request, string $slug, int $id): Response
     {
-        return new Response ('Recipe: '.$slug);
+        return $this->render('recipe/show.html.twig', [
+            'slug' => $slug,
+            'id' => $id,
+        ]);
     }
 }
